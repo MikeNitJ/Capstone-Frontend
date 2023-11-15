@@ -6,11 +6,12 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    // e.preventDefault();
     try {
       // Make an API request to your login endpoint
       // Send username and password in the request
-      const response = await fetch("https://localhost:7000/login/", {
+      const response = await fetch("https://localhost:7000/user/login/", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

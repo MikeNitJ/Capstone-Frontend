@@ -6,14 +6,16 @@ import Login from "./pages/Login"
 import Order from "./pages/Order"
 import { foodIndexLoader } from "./loader"
 import FoodShow from "./pages/FoodShow"
+import Cart from "./pages/Cart"
 
 const router = createBrowserRouter(createRoutesFromElements(
     <>
         <Route path="/" element={<Home/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/order" element={<Order/>} loader={foodIndexLoader}/>
-        <Route path="/food/:id" element={<FoodShow/>} loader={foodIndexLoader}/>
+        <Route path="/order/:id" element={<Order/>} loader={foodIndexLoader}/>
+        <Route path="/food/:id" element={<FoodShow/>} />
+        <Route path="/cart/:id" element={<Cart/>}/>
     </>
 ))
 

@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 
 const FoodShow = () => {
     
-const { id } = useParams();
+const { id } = useParams();//to use id from url 
 const [foodShow, setFoodShow] = useState({});
 const URL = "http://localhost:7000"; // Add "http://" before the URL
 const token = localStorage.getItem('accessToken');
