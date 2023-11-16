@@ -45,6 +45,7 @@ const commonHeaders = {
 
   return (
     <div>
+
       <h2>Food Details</h2>
       <p>Name: {foodShow.name}</p>
       <p>ID: {foodShow._id}</p>

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLoaderData } from 'react-router-dom';
+import { foodIndexLoader } from '../loader';
 
 const Order = () => {
-  const {id} = useParams()
+  const {foodListData, orderListData } = useLoaderData()
+  const id = useParams()
   const [foodList, setFoodList] = useState([]);
   const [userId, setUserId] = useState(""); 
   const URL = "http://localhost:7000"; // Add "http://" before the URL
@@ -11,11 +13,31 @@ const Order = () => {
     "Content-Type": "application/json",
     Authorization: `Token ${token}`,
   };
-
+  
+  // foodIndexLoader()
+  console.log(foodListData,orderListData,id);
   // Define the foodIndexLoader function outside of the component
-  const foodIndexLoader = async () => {
+  // const foodIndexLoader = async () => {
+  //   try {
+  //     const response = await fetch(URL + "/food", {
+  //       headers: commonHeaders,
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error(`Request failed with status: ${response.status}`);
+  //     }
+
+  //     const foodListData = await response.json();
+  //     return foodListData;
+  //   } catch (error) {
+  //     console.error('Error fetching food data:', error);
+  //     throw error; // Rethrow the error for further handling if needed
+  //   }
+  // };
+
+  const orderShowLoader = async (id) => {
     try {
-      const response = await fetch(URL + "/food", {
+      const response = await fetch(URL + `/order/${id}`, {
         headers: commonHeaders,
       });
 
@@ -23,13 +45,14 @@ const Order = () => {
         throw new Error(`Request failed with status: ${response.status}`);
       }
 
-      const foodListData = await response.json();
-      return foodListData;
+      const orderData = await response.json();
+      return orderData;
     } catch (error) {
       console.error('Error fetching food data:', error);
       throw error; // Rethrow the error for further handling if needed
     }
   };
+
 
   const orderCreateAction = async (selectedFoods) => {
     try {
@@ -95,21 +118,23 @@ const Order = () => {
 
 
 
-  useEffect(() => {
-    // Call the foodIndexLoader function when the component mounts
-    foodIndexLoader()
-      .then((data) => {
-        setFoodList(data);
-      })
-      .catch((error) => {
-        // Handle the error, e.g., show an error message
-      });
-  }, []); // Empty dependency array means this effect runs once when the component mounts
+  // useEffect(() => {
+  //   // Call the foodIndexLoader function when the component mounts
+  //   foodIndexLoader()
+  //     .then((data) => {
+  //       setFoodList(data);
+  //     })
+  //     .catch((error) => {
+  //       // Handle the error, e.g., show an error message
+  //     });
+  // }, []); // Empty dependency array means this effect runs once when the component mounts
 
   
     return (
         <div>
           <button onClick={createCart}>Create Cart</button>
+          <h2>Show Order</h2>
+          <p></p>
           <h2>Food Items</h2>
           <ul>
             {foodList.map((food) => (
