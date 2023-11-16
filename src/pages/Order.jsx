@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useLoaderData } from 'react-router-dom';
-import { foodIndexLoader } from '../loader';
+
 
 const Order = () => {
   const {foodListData, orderListData } = useLoaderData()
-  const id = useParams()
+  const {id} = useParams()
   const [foodList, setFoodList] = useState([]);
   const [userId, setUserId] = useState(""); 
   const URL = "http://localhost:7000"; // Add "http://" before the URL
